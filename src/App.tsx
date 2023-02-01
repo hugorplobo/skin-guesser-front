@@ -28,8 +28,8 @@ export default function App() {
   }
 
   return (
-    <div className="flex h-screen text-white items-center p-4 flex-col justify-between">
-      <div className="flex items-center flex-col">
+    <div className="flex w-full h-screen text-white items-center p-4 flex-col justify-between">
+      <div className="flex w-full items-center flex-col">
         <h1 className="font-bold text-2xl">Skin Guesser</h1>
         <CanvasImage 
           url={url}
