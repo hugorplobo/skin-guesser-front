@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import WindowedSelect, { ActionMeta } from "react-windowed-select";
 import skins from "../../skins.json";
 import useCurrentDateString from "../hooks/useCurrentDateString";
-import useSWRImmutable from "swr/immutable";
 import { useGuesses } from "../hooks/useGuesses";
 import { TailSpin } from "react-loader-spinner";
 import { MD5 } from "crypto-js";
 
 export default function Input() {
-  const history = useGuesses(state => state.history);
   const pushHistory = useGuesses(state => state.pushHistory);
   const win = useGuesses(state => state.win);
   const decrease = useGuesses(state => state.decreaseGuesses);
@@ -16,14 +14,6 @@ export default function Input() {
   
   const date = useCurrentDateString();
   const [guessValue, setGuessValue] = useState("");
-  const [url, setUrl] = useState<string | null>(null);
-
-  const { data, isLoading } = useSWRImmutable(url, async () => {
-      return fetch(url!)
-        .then(res => res.text())
-        .then(res => res === "true");
-    }
-  );
 
   function handleOnChange(value: unknown, action: ActionMeta<unknown>) {
     if ((action as { action: string }).action === "select-option") {
@@ -33,14 +23,6 @@ export default function Input() {
 
   function handleOnClick() {
     if (guessValue !== "") {
-      setUrl(`http://localhost:9989/guess?date=${date}&guess=${guessValue}`);
-    }
-  }
-
-  useEffect(() => {
-    if (data !== undefined) {
-      setUrl(null);
-    
       pushHistory(guessValue);
 
       if (MD5(guessValue).toString() === skinName) {
@@ -49,7 +31,7 @@ export default function Input() {
         decrease();
       }
     }
-  }, [data]);
+  }
 
   return (
     <>
@@ -65,11 +47,7 @@ export default function Input() {
         className="bg-blue-500 h-[40px] shrink-0 m-4 w-full max-w-lg rounded hover:bg-blue-700 transition-colors"
         onClick={handleOnClick}
       >
-        { isLoading ? (
-          <TailSpin height={20} color="white" wrapperStyle={{ justifyContent: "center" }} />
-        ) : (
-          "Confirmar"
-        ) }
+        Confirmar
       </button>
     </>
   );
