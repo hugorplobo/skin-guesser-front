@@ -6,6 +6,7 @@ import { useGuesses } from "./hooks/useGuesses";
 import useSWRImmutable from "swr/immutable";
 import getSkinName from "./utils/getSkinName";
 import GuessesHistory from "./components/GuessesHistory";
+import { config } from "./config";
 
 export default function App() {
   const date = useCurrentDateString();
@@ -16,7 +17,7 @@ export default function App() {
   const skinName = useGuesses(state => state.response);
   const setSkin = useGuesses(state => state.setResponse);
 
-  const url = `http://localhost:9989/game?date=${date}`;
+  const url = `${config.apiUrl}/game?date=${date}`;
   const { data } = useSWRImmutable<{ skin_name: string }>(url, async () => {
     return fetch(url)
       .then(res => res.json());
