@@ -6,11 +6,13 @@ export interface GuessesState {
   hasWon: boolean;
   hasLost: boolean;
   response: string;
+  gameDate: string;
   pushHistory: (value: string) => void;
   decreaseGuesses: () => void;
   win: () => void;
   lose: () => void;
   setResponse: (value: string) => void;
+  setGameDate: (value: string) => void;
 }
 
 export const useGuesses = create<GuessesState>((set) => ({
@@ -19,6 +21,7 @@ export const useGuesses = create<GuessesState>((set) => ({
   hasWon: false,
   hasLost: false,
   response: "",
+  gameDate: "",
   pushHistory: (value) =>
     set((state) => ({ history: [value, ...state.history] })),
   decreaseGuesses: () =>
@@ -32,4 +35,5 @@ export const useGuesses = create<GuessesState>((set) => ({
   win: () => set((_) => ({ hasWon: true })),
   lose: () => set((_) => ({ hasLost: true })),
   setResponse: (value) => set((_) => ({ response: value })),
+  setGameDate: (value) => set((_) => ({ gameDate: value })),
 }));
