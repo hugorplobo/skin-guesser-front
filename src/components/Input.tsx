@@ -1,9 +1,10 @@
 import { useState } from "react";
-import WindowedSelect, { ActionMeta } from "react-windowed-select";
 import skins from "../../skins.json";
 import useCurrentDateString from "../hooks/useCurrentDateString";
 import { useGuesses } from "../hooks/useGuesses";
 import { MD5 } from "crypto-js";
+import { blue } from "tailwindcss/colors";
+import Select, { components, createFilter, OptionProps, ActionMeta } from "react-select";
 
 export default function Input() {
   const pushHistory = useGuesses(state => state.pushHistory);
@@ -32,14 +33,38 @@ export default function Input() {
     }
   }
 
+  const customOption = (props: OptionProps) => {
+    props.innerProps.onMouseMove = undefined;
+    props.innerProps.onMouseOver = undefined;
+
+    return (
+      <div>
+        <components.Option {...props} />
+      </div>
+    );
+  }
+
   return (
     <>
-      <WindowedSelect
+      <Select
+        components={{ Option: customOption }} 
         options={skins.map((skin) => ({ value: skin, label: skin }))}
         className="w-full max-w-lg h-[40px] mt-4 text-black cursor-pointer"
-        placeholder="Selecione a skin"
-        windowThreshold={100}
+        filterOption={createFilter({ ignoreAccents: false })}
+        styles={{
+          option: baseStyle => ({
+            ...baseStyle,
+            background: "white",
+            cursor: "pointer",
+            color: "black",
+            transition: "background .1s ease-in-out",
+            ":hover": {
+              background: blue[200]
+            }
+          })
+        }}
         onChange={handleOnChange}
+        isClearable
         isSearchable
       />
       <button 
