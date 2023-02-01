@@ -3,7 +3,6 @@ import WindowedSelect, { ActionMeta } from "react-windowed-select";
 import skins from "../../skins.json";
 import useCurrentDateString from "../hooks/useCurrentDateString";
 import { useGuesses } from "../hooks/useGuesses";
-import { TailSpin } from "react-loader-spinner";
 import { MD5 } from "crypto-js";
 
 export default function Input() {
