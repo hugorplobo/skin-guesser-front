@@ -8,6 +8,8 @@ import GuessesHistory from "./components/GuessesHistory";
 import { config } from "./config";
 import GameEnded from "./components/GameEnded";
 import { useEffect } from "react";
+import Header from "./components/Header";
+import useLoadGame from "./hooks/useLoadGame";
 
 export default function App() {
   const date = useCurrentDateString();
@@ -32,10 +34,12 @@ export default function App() {
     setGameDate(date);
   }, []);
 
+  useLoadGame();
+
   return (
     <div className="flex w-full min-h-screen text-white items-center p-4 flex-col justify-between">
       <div className="flex w-full items-center flex-col">
-        <h1 className="font-bold text-2xl">Skin Guesser</h1>
+        <Header />
         <CanvasImage 
           url={url}
           className="w-full max-w-lg m-4 shadow-lg" 
