@@ -13,7 +13,7 @@ export default function Share() {
 
   function copyGame() {
     if (!copied) {
-      navigator.clipboard.writeText(`Skin guesser: ${date.split("-").reverse().join("/")}\n\n${emojis}`);
+      navigator.clipboard.writeText(`Joguei o skin guesser ${date.split("-").reverse().join("/")}\n\n${emojis}\n\nTente também em https://skin-guesser.netlify.app`);
       setCopied(true);
 
       setTimeout(() => {
