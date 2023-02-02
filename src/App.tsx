@@ -10,6 +10,7 @@ import GameEnded from "./components/GameEnded";
 import { useEffect } from "react";
 import Header from "./components/Header";
 import useLoadGame from "./hooks/useLoadGame";
+import Stats from "./components/Stats";
 
 export default function App() {
   const date = useCurrentDateString();
@@ -37,7 +38,7 @@ export default function App() {
   useLoadGame();
 
   return (
-    <div className="flex w-full min-h-screen text-white items-center p-4 flex-col justify-between">
+    <div className="flex w-full min-h-screen p-4 text-white items-center flex-col justify-between relative">
       <div className="flex w-full items-center flex-col">
         <Header />
         <CanvasImage 
