@@ -1,6 +1,9 @@
 import { useRef } from "react";
+import Skeleton from "react-loading-skeleton";
 import useSWRImmutable from "swr/immutable";
 import { useGuesses } from "../hooks/useGuesses";
+import 'react-loading-skeleton/dist/skeleton.css'
+import { gray } from "tailwindcss/colors";
 
 interface Props {
   url: string;
@@ -56,10 +59,23 @@ export default function CanvasImage({ url, className }: Props) {
 
   return (
     <>
-      {error ? (
-        <h3>Houve um erro</h3>
+      { isLoading ? (
+        <div className={`min-h-[302px] ${className}`}>
+          <Skeleton 
+            className="leading-none"
+            height={300} 
+            enableAnimation={true}
+            baseColor={gray[800]}
+            highlightColor={gray[700]}
+            borderRadius={0}
+          />
+        </div>
+      ) : error ? (
+        <div className={`min-h-[302px] flex justify-center items-center ${className} shadow-none`}>
+          Alguma coisa deu errado :(
+        </div>
       ) : (
-        <canvas className={className} ref={canvas}></canvas>
+        <canvas className={`min-h-[302px] ${className}`} ref={canvas}></canvas>
       )}
     </>
   );
