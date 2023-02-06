@@ -26,7 +26,7 @@ export default function Distribution({ stats }: Props) {
   return (
     <div className="w-full mt-4 flex items-center flex-col">
       <h2 className="font-bold text-xl">Distribuição de jogos</h2>
-      <div className="w-full flex flex-col px-2 gap-2 mt-2">
+      <div className="w-full flex flex-col px-2 gap-2 mt-4">
         <Bar stats={stats} content={"1"} index={0} clasName="bg-green-500" />
         <Bar stats={stats} content={"2"} index={1} clasName="bg-green-500" />
         <Bar stats={stats} content={"3"} index={2} clasName="bg-green-500" />

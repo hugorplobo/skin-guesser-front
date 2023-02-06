@@ -60,10 +60,10 @@ export default function CanvasImage({ url, className }: Props) {
   return (
     <>
       { isLoading ? (
-        <div className={`min-h-[302px] ${className}`}>
+        <div className={`min-h-[373px] w-[205px] m-4 shadow-lg`}>
           <Skeleton 
             className="leading-none"
-            height={300} 
+            height={370} 
             enableAnimation={true}
             baseColor={gray[800]}
             highlightColor={gray[700]}
@@ -71,11 +71,11 @@ export default function CanvasImage({ url, className }: Props) {
           />
         </div>
       ) : error ? (
-        <div className={`min-h-[302px] flex justify-center items-center ${className} shadow-none`}>
+        <div className={`min-h-[373px] flex justify-center items-center m-4 shadow-lg`}>
           Alguma coisa deu errado :(
         </div>
       ) : (
-        <canvas className={`min-h-[302px] ${className}`} ref={canvas}></canvas>
+        <canvas className={`min-h-[373px] m-4 shadow-lg`} ref={canvas}></canvas>
       )}
     </>
   );

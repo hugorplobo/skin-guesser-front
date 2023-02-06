@@ -43,7 +43,6 @@ export default function App() {
         <Header />
         <CanvasImage 
           url={url}
-          className="w-full max-w-lg m-4 shadow-lg" 
         />
         { hasLost || hasWon ? (
           <GameEnded />
