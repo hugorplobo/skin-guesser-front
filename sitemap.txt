@@ -1,0 +1,3 @@
+https://skin-guesser.netlify.app/
+https://skin-guesser.netlify.app/pt
+https://skin-guesser.netlify.app/en
