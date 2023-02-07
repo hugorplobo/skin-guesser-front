@@ -4,10 +4,10 @@ import useSWRImmutable from "swr/immutable";
 import { useGuesses } from "../hooks/useGuesses";
 import 'react-loading-skeleton/dist/skeleton.css'
 import { gray } from "tailwindcss/colors";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   url: string;
-  className?: string;
 }
 
 const pixelValues = new Map<number, number>([
@@ -18,7 +18,8 @@ const pixelValues = new Map<number, number>([
   [1, 25]
 ]);
 
-export default function CanvasImage({ url, className }: Props) {
+export default function CanvasImage({ url }: Props) {
+  const { t } = useTranslation();
   const canvas = useRef<HTMLCanvasElement>(null);
   const remaining = useGuesses(state => state.remaining);
   const hasWon = useGuesses(state => state.hasWon);
@@ -72,7 +73,7 @@ export default function CanvasImage({ url, className }: Props) {
         </div>
       ) : error ? (
         <div className={`min-h-[373px] flex justify-center items-center m-4 shadow-lg`}>
-          Alguma coisa deu errado :(
+          {t("error")}
         </div>
       ) : (
         <canvas className={`min-h-[373px] m-4 shadow-lg`} ref={canvas}></canvas>

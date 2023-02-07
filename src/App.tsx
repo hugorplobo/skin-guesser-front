@@ -10,9 +10,11 @@ import GameEnded from "./components/GameEnded";
 import { useEffect } from "react";
 import Header from "./components/Header";
 import useLoadGame from "./hooks/useLoadGame";
-import Stats from "./components/Stats";
+import { useTranslation } from "react-i18next";
+import { Helmet } from "react-helmet";
 
 export default function App() {
+  const { t, i18n } = useTranslation();
   const date = useCurrentDateString();
 
   const hasWon = useGuesses(state => state.hasWon);
@@ -21,11 +23,14 @@ export default function App() {
   const setSkin = useGuesses(state => state.setResponse);
   const setGameDate = useGuesses(state => state.setGameDate);
 
+  const language = window.location.pathname.split("/")[1];
   const url = `${config.apiUrl}/game?date=${date}`;
   const { data } = useSWRImmutable<{ skin_name: string }>(url, async () => {
     return fetch(url)
       .then(res => res.json());
   });
+
+  document.documentElement.lang = language;
 
   if (data && skinName !== data.skin_name) {
     setSkin(data.skin_name);
@@ -36,9 +41,17 @@ export default function App() {
   }, []);
 
   useLoadGame();
+  
+  if (i18n.language !== language) {
+    i18n.changeLanguage(language);
+  }
 
   return (
     <div className="flex w-full min-h-screen p-4 text-white items-center flex-col justify-between relative">
+      <Helmet>
+        <title>{t("title")}</title>
+        <meta name="description" content={t("description")!}></meta>
+      </Helmet>
       <div className="flex w-full items-center flex-col">
         <Header />
         <CanvasImage 

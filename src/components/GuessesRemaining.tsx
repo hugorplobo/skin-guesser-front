@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 import { useGuesses } from "../hooks/useGuesses";
 
 export default function GuessesRemaining() {
+  const { t } = useTranslation();
   const remaining = useGuesses(state => state.remaining);
 
   return (
@@ -9,7 +11,7 @@ export default function GuessesRemaining() {
         className={`${remaining >= 3 ? "text-green-500" : "text-red-500"} font-bold`}
       >
         { remaining }
-      </span> chute{ remaining > 1 ? "s" : "" } restante{ remaining > 1 ? "s" : "" }
+      </span> { remaining > 1 ? t("tries") : t("try") }
     </p>
   );
 }
