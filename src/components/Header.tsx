@@ -4,17 +4,19 @@ import getNextGameDate from "../utils/getNextGameDate";
 import { BsBarChart } from "react-icons/bs";
 import Stats from "./Stats";
 import { createPortal } from "react-dom";
+import { useTranslation } from "react-i18next";
 
 export default function Header() {
+  const { t } = useTranslation();
   const [hasTimerFinished, setHasTimerFinished] = useState(false);
   const [isStatsOpen, setIsStatsOpen] = useState(false);
 
   return (
     <div className="flex w-full max-w-lg justify-center items-center relative">
       <div className="absolute left-0 flex flex-col">
-        <span className="font-bold text-xs left-0">Próximo:</span>
+        <span className="font-bold text-xs left-0">{t("next")}</span>
         {hasTimerFinished ? (
-          <span className="text-xs">Já disponível!</span>
+          <span className="text-xs">{t("ready")}</span>
         ) : (
           <Countdown
             className="text-xs"

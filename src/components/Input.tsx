@@ -1,18 +1,18 @@
 import { useState } from "react";
 import skins from "../../skins.json";
-import useCurrentDateString from "../hooks/useCurrentDateString";
 import { useGuesses } from "../hooks/useGuesses";
 import { MD5 } from "crypto-js";
 import { blue } from "tailwindcss/colors";
 import Select, { components, createFilter, OptionProps, ActionMeta } from "react-select";
+import { useTranslation } from "react-i18next";
 
 export default function Input() {
+  const { t } = useTranslation();
   const pushHistory = useGuesses(state => state.pushHistory);
   const win = useGuesses(state => state.win);
   const decrease = useGuesses(state => state.decreaseGuesses);
   const skinName = useGuesses(state => state.response);
   
-  const date = useCurrentDateString();
   const [guessValue, setGuessValue] = useState("");
 
   function handleOnChange(value: unknown, action: ActionMeta<unknown>) {
@@ -71,7 +71,7 @@ export default function Input() {
         className="bg-blue-500 h-[40px] shrink-0 m-4 w-full max-w-lg rounded hover:bg-blue-700 transition-colors"
         onClick={handleOnClick}
       >
-        Confirmar
+        {t("confirm")}
       </button>
     </>
   );

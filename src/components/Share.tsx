@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useGuesses } from "../hooks/useGuesses";
 
 export default function Share() {
+  const { t } = useTranslation();
   const [showHistory, setShowHistory] = useState(false);
   const [copied, setCopied] = useState(false);
 
@@ -26,10 +28,10 @@ export default function Share() {
     <div className="rounded my-4 py-3 w-80 flex flex-col items-center gap-4">
       {emojis}
       <button onClick={copyGame} className="font-bold py-1 px-2 hover:bg-blue-600 hover:text-white hover:outline-blue-600 rounded text-blue-600 bg-transparent outline outline-1 outline-blue-600 transition-colors">
-        { copied ? "Copiado" : "Compartilhar" }
+        { copied ? t("copied") : t("share") }
       </button>
       <span className="text-xs cursor-pointer underline" onClick={() => setShowHistory(history => !history)}>
-        {showHistory ? "Ocultar" : "Mostrar"} chutes
+        {(showHistory ? t("hide") : t("show")) + " " + t("tries")}
       </span>
       { showHistory && history.length > 0 ? (
         <div className="flex flex-col items-center">

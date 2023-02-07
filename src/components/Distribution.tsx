@@ -1,3 +1,5 @@
+import { t } from "i18next";
+import { useTranslation } from "react-i18next"
 import { Stats } from "../hooks/useStats"
 
 interface Props {
@@ -12,6 +14,8 @@ interface BarProps {
 }
 
 function Bar({ stats, content, index, clasName }: BarProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex w-full gap-2">
       <div className="w-4 text-center font-bold">{ content }</div>
@@ -25,7 +29,7 @@ function Bar({ stats, content, index, clasName }: BarProps) {
 export default function Distribution({ stats }: Props) {
   return (
     <div className="w-full mt-4 flex items-center flex-col">
-      <h2 className="font-bold text-xl">Distribuição de jogos</h2>
+      <h2 className="font-bold text-xl">{t("distribution")}</h2>
       <div className="w-full flex flex-col px-2 gap-2 mt-4">
         <Bar stats={stats} content={"1"} index={0} clasName="bg-green-500" />
         <Bar stats={stats} content={"2"} index={1} clasName="bg-green-500" />
