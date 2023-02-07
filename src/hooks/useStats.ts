@@ -14,6 +14,7 @@ interface Games {
 
 export default function useStats() {
   const games: Games = JSON.parse(JSON.stringify(localStorage));
+  const sortedKeys = Object.keys(games).sort();
 
   let gamesWon = 0;
   const stats: Stats = {
@@ -24,7 +25,7 @@ export default function useStats() {
     distribution: []
   };
 
-  for (const date in games) {
+  for (const date of sortedKeys) {
     const game: GameData = JSON.parse(games[date]);
     stats.gamesPlayed++;
 
@@ -33,18 +34,19 @@ export default function useStats() {
     }
   }
 
-  stats.currentStreak = getCurrentStreak(games);
-  stats.maxStreak = getMaxStreak(games);
-  stats.distribution = getDistribution(games);
+  stats.currentStreak = getCurrentStreak(sortedKeys, games);
+  stats.maxStreak = getMaxStreak(sortedKeys, games);
+  stats.distribution = getDistribution(sortedKeys, games);
 
   stats.winPercentage = stats.gamesPlayed === 0 ? 0 : gamesWon / stats.gamesPlayed;
   return stats;
 }
 
-function getCurrentStreak(games: Games) {
+function getCurrentStreak(keys: string[], games: Games) {
   let currentStreak = 0;
+  const reversedKeys = [...keys].reverse();
 
-  for (const date of Object.keys(games).reverse()) {
+  for (const date of reversedKeys) {
     const game: GameData = JSON.parse(games[date]);
     if (game.hasWon) {
       currentStreak++;
@@ -56,11 +58,11 @@ function getCurrentStreak(games: Games) {
   return currentStreak;
 }
 
-function getMaxStreak(games: Games) {
+function getMaxStreak(keys: string[], games: Games) {
   let maxStreak = 0;
   let currentStreak = 0;
 
-  for (const date in games) {
+  for (const date of keys) {
     const game: GameData = JSON.parse(games[date]);
     if (game.hasWon) {
       currentStreak++;
@@ -73,10 +75,10 @@ function getMaxStreak(games: Games) {
   return maxStreak;
 }
 
-function getDistribution(games: Games) {
+function getDistribution(keys: string[], games: Games) {
   const distribution = [0, 0, 0, 0, 0, 0];
 
-  for (const date in games) {
+  for (const date of keys) {
     const game: GameData = JSON.parse(games[date]);
     if (game.hasWon) {
       const guesses = 5 - game.remaining + 1;
