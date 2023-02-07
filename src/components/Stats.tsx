@@ -41,7 +41,7 @@ export default function Stats({ onClose }: Props) {
             <span className="text-sm">{t("games")}</span>
           </ColumnText>
           <ColumnText>
-            <span className="font-bold text-xl">{ `${(stats.winPercentage * 100).toFixed(2)}%` }</span>
+            <span className="font-bold text-xl">{ `${(stats.winPercentage * 100).toFixed(1)}%` }</span>
             <span className="text-sm">{t("victories")}</span>
           </ColumnText>
           <ColumnText className="w-16">
@@ -49,7 +49,7 @@ export default function Stats({ onClose }: Props) {
             <span className="text-sm text-center">{t("currentStreak")}</span>
           </ColumnText>
           <ColumnText className="w-16">
-            <span className="font-bold text-xl">{ stats.currentStreak }</span>
+            <span className="font-bold text-xl">{ stats.maxStreak }</span>
             <span className="text-sm text-center">{t("maxStreak")}</span>
           </ColumnText>
         </div>
