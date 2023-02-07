@@ -23,7 +23,7 @@ export default function App() {
   const setSkin = useGuesses(state => state.setResponse);
   const setGameDate = useGuesses(state => state.setGameDate);
 
-  const language = window.location.pathname.split("/")[1];
+  const language = window.location.pathname.split("/")[1] || "pt";
   const url = `${config.apiUrl}/game?date=${date}`;
   const { data } = useSWRImmutable<{ skin_name: string }>(url, async () => {
     return fetch(url)
@@ -50,7 +50,7 @@ export default function App() {
     <div className="flex w-full min-h-screen p-4 text-white items-center flex-col justify-between relative">
       <Helmet>
         <title>{t("title")}</title>
-        <meta name="description" content={t("description")!}></meta>
+        <meta name="description" content={t("description")!} />
       </Helmet>
       <div className="flex w-full items-center flex-col">
         <Header />
