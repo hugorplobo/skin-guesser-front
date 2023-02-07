@@ -39,7 +39,7 @@ export default function Stats({ onClose }: Props) {
             <span className="text-sm">jogo{ stats.gamesPlayed === 1 ? "" : "s" }</span>
           </ColumnText>
           <ColumnText>
-            <span className="font-bold text-xl">{ `${stats.winPercentage * 100}%` }</span>
+            <span className="font-bold text-xl">{ `${(stats.winPercentage * 100).toFixed(2)}%` }</span>
             <span className="text-sm">de vitórias</span>
           </ColumnText>
           <ColumnText className="w-20">
