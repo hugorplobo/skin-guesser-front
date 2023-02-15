@@ -48,6 +48,11 @@ function getCurrentStreak(keys: string[], games: Games) {
 
   for (const date of reversedKeys) {
     const game: GameData = JSON.parse(games[date]);
+
+    if (game.hasWon === undefined) {
+      continue;
+    }
+
     if (game.hasWon) {
       currentStreak++;
     } else {
