@@ -1,4 +1,3 @@
-import { t } from "i18next";
 import { useTranslation } from "react-i18next"
 import { Stats } from "../hooks/useStats"
 
@@ -14,8 +13,6 @@ interface BarProps {
 }
 
 function Bar({ stats, content, index, clasName }: BarProps) {
-  const { t } = useTranslation();
-
   return (
     <div className="flex w-full gap-2">
       <div className="w-4 text-center font-bold">{ content }</div>
@@ -27,6 +24,8 @@ function Bar({ stats, content, index, clasName }: BarProps) {
 }
 
 export default function Distribution({ stats }: Props) {
+  const { t } = useTranslation();
+
   return (
     <div className="w-full mt-4 flex items-center flex-col">
       <h2 className="font-bold text-xl">{t("distribution")}</h2>

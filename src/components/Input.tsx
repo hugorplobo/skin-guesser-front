@@ -1,5 +1,6 @@
 import { useState } from "react";
-import skins from "../../skins.json";
+import skins_pt from "../../skins_pt.json";
+import skins_en from "../../skins_en.json";
 import { useGuesses } from "../hooks/useGuesses";
 import { MD5 } from "crypto-js";
 import { blue } from "tailwindcss/colors";
@@ -7,7 +8,8 @@ import Select, { components, createFilter, OptionProps, ActionMeta } from "react
 import { useTranslation } from "react-i18next";
 
 export default function Input() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const skins = i18n.language === "pt" ? skins_pt : skins_en;
   const pushHistory = useGuesses(state => state.pushHistory);
   const win = useGuesses(state => state.win);
   const decrease = useGuesses(state => state.decreaseGuesses);
