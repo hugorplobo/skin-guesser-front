@@ -1,8 +1,8 @@
 import fs from "fs";
 
 async function generateSkinsList() {
-    const generalUrl = "http://ddragon.leagueoflegends.com/cdn/13.1.1/data/pt_BR/champion.json";
-    const championUrl = "http://ddragon.leagueoflegends.com/cdn/13.1.1/data/pt_BR/champion/";
+    const generalUrl = "http://ddragon.leagueoflegends.com/cdn/13.1.1/data/en_US/champion.json";
+    const championUrl = "http://ddragon.leagueoflegends.com/cdn/13.1.1/data/en_US/champion/";
     let skins = [];
 
     const champions = await fetch(generalUrl).then(res => res.json());
@@ -16,7 +16,7 @@ async function generateSkinsList() {
         }));
     }
 
-    fs.writeFileSync("./skins.json", JSON.stringify(skins));
+    fs.writeFileSync("./skins_en.json", JSON.stringify(skins));
 }
 
 generateSkinsList();
